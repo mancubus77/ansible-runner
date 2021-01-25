@@ -19,7 +19,8 @@ FROM $ANSIBLE_CORE_IMAGE as ansible-core
 
 COPY --from=builder /output/ /output
 RUN /output/install-from-bindep \
-  && rm -rf /output
+  && rm -rf /output \
+  && yum install mysql -y
 
 # Prepare the /runner folder, seed the folder with demo data
 ADD demo /runner
